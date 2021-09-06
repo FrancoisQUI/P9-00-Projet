@@ -1,0 +1,15 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="CssBrowserCompatibilityForProperties" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="myChromeVersion" value="91" />
+      <option name="myEdgeVersion" value="91" />
+      <option name="mySafariVersion" value="14" />
+    </inspection_tool>
+    <inspection_tool class="DuplicatedCode" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <Languages>
+        <language minSize="84" name="Python" />
+      </Languages>
+    </inspection_tool>
+  </profile>
+</component>
