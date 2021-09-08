@@ -1,0 +1,24 @@
+{% load tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en" class="text-gray-900">
+<head>
+    <meta charset="UTF-8">
+
+    <title>LIT Review</title>
+    {% tailwind_css %}
+    {% tailwind_preload_css %}
+</head>
+<body class="bg-gradient-to-b from-gray-900 to-blue-900">
+<header>
+    <nav class="visible text-gray-200 bg-gray-900 sticky flex">
+        <p>here the nav</p>
+    </nav>
+</header>
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+
+</body>
+</html>
