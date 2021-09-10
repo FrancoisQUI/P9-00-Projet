@@ -1,6 +1,6 @@
 {% load tailwind_tags %}
 <!DOCTYPE html>
-<html lang="en" class="text-gray-900">
+<html lang="en" class="text-gray-900 bg-gradient-to-b from-gray-900 to-blue-900 min-h-screen">
 <head>
     <meta charset="UTF-8">
 
@@ -8,11 +8,9 @@
     {% tailwind_css %}
     {% tailwind_preload_css %}
 </head>
-<body class="bg-gradient-to-b from-gray-900 to-blue-900">
+<body class="">
 <header>
-    <nav class="visible text-gray-200 bg-gray-900 sticky flex">
-        <p>here the nav</p>
-    </nav>
+    {% include "litrev/navbar.html" %}
 </header>
 <main>
     {% block content %}

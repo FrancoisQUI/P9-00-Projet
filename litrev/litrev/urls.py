@@ -21,6 +21,12 @@ from . import views
 urlpatterns = [
     path('', views.index, name="site-index"),
     path('signup/', views.sign_up, name="sign-up"),
-    path('admin/', admin.site.urls),
+    path('flux/', views.flux, name="flux"),
+    path('post/', views.post, name="post"),
+    path('subs/', views.subs, name="subs"),
     path('book/', include('bkreport.urls')),
+    path('admin/', admin.site.urls),
 ]
+
+
+

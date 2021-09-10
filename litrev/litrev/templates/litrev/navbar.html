@@ -1,0 +1,23 @@
+{% block navbar %}
+    <nav class="text-gray-200 bg-gray-900 sticky flex text-center justify-between items-center">
+        <img src="https://place-hold.it/300&fontsize=24&text=Logo" alt="" class="w-20">
+        <h1>LIT review</h1>
+        <ul class="flex justify-between">
+            {% if is_logged_in %}
+                <li><a href="{% url 'flux' %}">Flux</a></li>
+                <li><a href="{% url 'post' %}">Post</a></li>
+                <li><a href="{% url 'subs' %}">Abonnement</a></li>
+                <li><a href="#">Disconnect</a></li>
+            {% else %}
+                <li><a href="{% url 'site-index' %}">Login</a></li>
+                <li><a href="{% url 'sign-up' %}">Sign-up</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <style>
+        li {
+            @apply mx-3 text-yellow-900
+        }
+    </style>
+{% endblock %}

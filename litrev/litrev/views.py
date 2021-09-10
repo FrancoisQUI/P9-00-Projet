@@ -6,7 +6,7 @@ from .form import SignUpForm
 
 
 def index(request):
-    return HttpResponse("Main index page")
+    return render(request, "litrev/index.html")
 
 
 def sign_up(request):
@@ -28,3 +28,15 @@ def sign_up(request):
     else:
         form = SignUpForm()
     return render(request, 'litrev/signup.html', {'form': form})
+
+
+def flux(request):
+    return HttpResponse("Flux page")
+
+
+def subs(request):
+    return HttpResponse("Subs page")
+
+
+def post(request):
+    return HttpResponse("Post page")
