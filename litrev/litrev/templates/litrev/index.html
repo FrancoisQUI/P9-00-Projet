@@ -1,7 +1,35 @@
 {% extends 'litrev/base.html' %}
 
 {% block content %}
+    {% if not request.user.is_authenticated %}
+        <div class="sign-up form-container">
+            <div class="container form-base">
+                <h2>Pas encore utilisateur ?</h2>
+                <form action="{% url 'sign-up' %}">
+                    <button type="submit">Créer un compte</button>
+                </form>
 
+            </div>
+        </div>
 
+        <div class="login form-container">
+            <div class="container form-base">
+                <h2>Login</h2>
+                <form method="POST">
+                    {% csrf_token %}
+                    {% if error %}
+                        <p class="text-red-500">{{ error }}</p>
+                    {% endif %}
+                    {{form.as_ul}}
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+        </div>
+    {% else %}
+        <div class="container text-gray-200">
+            <h2>You are connected as {{ user.username }}</h2>
+            <p>do you want to <a href="{% url 'disconnect' %}">log-out</a> ? </p>
+        </div>
 
+    {% endif %}
 {% endblock %}
