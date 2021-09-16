@@ -4,8 +4,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from bkreport.forms import TicketForm
-from bkreport.models import Ticket
+from bkreport.forms import TicketForm, ReviewForm
+from bkreport.models import Ticket, Review
 
 
 def index(request):
@@ -15,7 +15,6 @@ def index(request):
 def new_ticket(request):
     context = {}
     if request.method == "POST":
-        pprint(request.POST)
         description = request.POST.get('description')
         image = request.POST.get('image')
         title = request.POST.get('title')
@@ -30,3 +29,25 @@ def new_ticket(request):
     form = TicketForm()
     context["form"] = form
     return render(request, 'bkreport/ticket/new.html', context=context)
+
+
+def new_review(request):
+    context = {}
+    if request.method == "POST":
+        ticket = request.POST.get('ticket')
+        rating = request.POST.get('rating')
+        headline = request.POST.get('headline')
+        body = request.POST.get('body')
+        user = request.user
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = Review.objects.create(rating=rating, 
+                                           headline=headline,
+                                           body=body,
+                                           user=user,
+                                           ticket=ticket)
+            review.save()
+            return redirect('new_review')
+    form = ReviewForm()
+    context["form"] = form
+    return render(request, 'bkreport/review/new.html', context=context)

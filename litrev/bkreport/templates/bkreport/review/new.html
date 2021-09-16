@@ -1,0 +1,16 @@
+{% extends 'litrev/base.html' %}
+
+{% block content %}
+
+    <div class="container css_card-container">
+        <div class="container css_card-base">
+            <p class="text-red-600">{{ message|default_if_none:" "}}</p>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_ul }}
+                <button type="submit">Enregistrer</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
