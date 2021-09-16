@@ -1,7 +1,7 @@
 from pprint import pprint
 
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 # Create your views here.
 from bkreport.forms import TicketForm, ReviewForm
@@ -34,7 +34,7 @@ def new_ticket(request):
 def new_review(request):
     context = {}
     if request.method == "POST":
-        ticket = request.POST.get('ticket')
+        ticket = get_object_or_404(Ticket, id=request.POST.get('ticket'))
         rating = request.POST.get('rating')
         headline = request.POST.get('headline')
         body = request.POST.get('body')

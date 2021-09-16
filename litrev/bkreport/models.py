@@ -12,7 +12,7 @@ class Ticket(models.Model):
     time_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.title
+        return f"{self.id} - {self.title} - {self.user.username}"
 
 
 class Review(models.Model):
@@ -27,7 +27,7 @@ class Review(models.Model):
     time_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.headline
+        return f"{self.id} - {self.ticket.title} - {self.user.username}"
 
 
 class UserFollows(models.Model):
@@ -37,6 +37,8 @@ class UserFollows(models.Model):
     followed_user = models.ForeignKey(to=settings.AUTH_USER_MODEL,
                                       on_delete=models.CASCADE,
                                       related_name='followed_by')
+    def __str__(self):
+        return f"{self.id} - {self.user} -> {self.followed_user}"
 
     class Meta:
         # ensures we don't get multiple UserFollows instances
