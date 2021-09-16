@@ -15,6 +15,10 @@
 <main>
     {% block content %}
     {% endblock %}
+    {% if not request.user.is_authenticated %}
+        <div class="alert text-gray-200 text-center">vous n'êtes pas connecté : <a href="{% url "site-index" %}" class="text-red-600"> Se
+            connecter ?</a></div>
+    {% endif %}
 </main>
 
 

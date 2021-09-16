@@ -9,10 +9,10 @@
             {% endif %}
             <ul class="container flex">
                 {% if request.user.is_authenticated %}
-                    <li class="mx-2"><a href="{% url 'flux' %}">Flux</a></li>
-                    <li class="mx-2"><a href="{% url 'post' %}">Post</a></li>
-                    <li class="mx-2"><a href="{% url 'subs' %}">Abonnement</a></li>
-                    <li class="mx-2"><a href="{% url 'disconnect' %}">Disconnect</a></li>
+                    <li class="mx-2 min-w-1/6"><a href="{% url 'flux' %}">Flux</a></li>
+                    <li class="mx-2 min-w-1/6"><a href="{% url 'post' %}">Post</a></li>
+                    <li class="mx-2 min-w-1/6"><a href="{% url 'subs' %}">Abonnement</a></li>
+                    <li class="mx-2 min-w-1/6"><a href="{% url 'disconnect' %}">Disconnect</a></li>
                 {% endif %}
             </ul>
         </div>

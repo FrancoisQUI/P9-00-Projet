@@ -8,29 +8,37 @@
     @apply text-2xl;
   }
   h2 {
-    @apply text-xl;
+    @apply text-2xl text-center mb-4;
   }
   button{
     @apply w-full flex justify-center bg-blue-400  hover:bg-blue-500 text-gray-100 p-3  rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500;
   }
 
-  .form-container{
-    @apply flex justify-center self-center  z-10;
+  .ccs_card-container{
+    @apply flex justify-center self-center z-10 items-start p-5 h-1/2;
   }
 
-  .form-base{
-    @apply p-12 bg-white mx-auto rounded-2xl w-auto;
+  .css_card-base{
+    @apply p-6 bg-white mx-auto rounded-2xl w-full flex-grow;
   }
 
-  .form-title{
-    @apply mb-4;
+  .css_card-base form li {
+    @apply m-6 container flex justify-around;
   }
 
-  .form-title h2, .form-title h3 {
-    @apply font-semibold text-2xl text-gray-800;
+  .css_card-base form label {
+    @apply w-max;
   }
 
-  .form-title p {
-    @apply text-gray-600
+  .css_card-base form input {
+    @apply w-8/12;
+  }
+
+  .css_form-title{
+    @apply mb-4 text-center;
+  }
+
+  .css_form-title p {
+    @apply text-gray-600;
   }
 }

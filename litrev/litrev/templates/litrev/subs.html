@@ -1,7 +1,38 @@
 {% extends 'litrev/base.html' %}
 
 {% block content %}
+    {% if request.user.is_authenticated%}
+        <div class="ccs_card-container">
+            <div class="container css_card-base w-full">
+                <h2>Suivre d'autres utilisateurs</h2>
+                <form method="POST">
+                    <label for="username"> Nom d'utilisateur </label>
+                    <input type="text" name="username">
+                    <button type="submit"> Suivre </button>
+                </form>
+            </div>
+        </div>
+        <div class="ccs_card-container">
+            <div class="container css_card-base w-full">
+                <h2>Vos abonnements</h2>
+                <ul>
+                    {% for follow in follows %}
+                        <li>
+                            {{ follow.followed_user }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="ccs_card-container">
+            <div class="container css_card-base w-full">
+                <h2>Vos Abonnés</h2>
+                {% for follower in followers %}
+                    {{ follower.user }}
+                {% endfor %}
 
-    
+            </div>
+        </div>
+    {% endif %}
 
 {% endblock %}

@@ -1,10 +1,10 @@
 {% extends "litrev/base.html" %}
 
 {% block content %}
-    <div class="form-container">
-        <div class="form-base">
-            <div class="form-title">
-                <h2>Sign up</h2>
+    <div class="ccs_card-container">
+        <div class="css_card-base">
+            <div class="css_form-title">
+                <h2>Inscrivez vous</h2>
             </div>
             <div>
                 <form method="post">
@@ -21,8 +21,15 @@
                                 </div>
                             {% endfor %}
                     {% endfor %}
-                    <button type="submit" class="">
-                        Sign up
+
+
+                    <button type="submit" class="m-2">
+                        enregistrer le compte
+                    </button>
+                </form>
+                <form action="{% url 'site-index' %}">
+                    <button class="m-2 bg-red-500 hover:bg-red-900">
+                        Retour
                     </button>
                 </form>
             </div>

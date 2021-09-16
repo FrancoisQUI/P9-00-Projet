@@ -3,10 +3,12 @@ from pprint import pprint
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_list_or_404
 
-from .form import SignUpForm
+from .forms import SignUpForm
+from bkreport.models import UserFollows
 
 
 def index(request):
@@ -55,7 +57,14 @@ def flux(request):
 
 
 def subs(request):
-    return HttpResponse("Subs page")
+    user_pk = request.user.id
+    follows = get_list_or_404(UserFollows, user_id=user_pk)
+    followers = get_list_or_404(UserFollows, followed_user_id=user_pk)
+    context = {
+        "follows": follows,
+        "followers": followers,
+    }
+    return render(request, 'litrev/subs.html', context)
 
 
 def post(request):
