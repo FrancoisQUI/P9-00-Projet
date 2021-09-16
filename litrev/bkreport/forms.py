@@ -6,5 +6,4 @@ from bkreport.models import Ticket
 class TicketForm(ModelForm):
     class Meta:
         model = Ticket
-        fields = ["title", "description",
-                  "user", "image"]
+        fields = ["title", "description", "image"]
