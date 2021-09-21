@@ -1,0 +1,9 @@
+{% extends 'litrev/base.html' %}
+
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_ul }}
+        <button type="submit">Envoyer Avis</button>
+    </form>
+{% endblock %}

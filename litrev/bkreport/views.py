@@ -1,9 +1,11 @@
 from pprint import pprint
 
+from django import forms
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
-# Create your views here.
 from bkreport.forms import TicketForm, ReviewForm
 from bkreport.models import Ticket, Review
 
@@ -41,7 +43,7 @@ def new_review(request):
         user = request.user
         form = ReviewForm(request.POST)
         if form.is_valid():
-            review = Review.objects.create(rating=rating, 
+            review = Review.objects.create(rating=rating,
                                            headline=headline,
                                            body=body,
                                            user=user,
@@ -51,3 +53,27 @@ def new_review(request):
     form = ReviewForm()
     context["form"] = form
     return render(request, 'bkreport/review/new.html', context=context)
+
+
+class TicketCreateView(CreateView):
+    model = Ticket
+    fields = ['title', 'description', 'image']
+
+    def form_valid(self, form):
+        form.instance.user_id = self.request.user.id
+        return super().form_valid(form)
+
+
+class ReviewCreateView(CreateView):
+    model = Review
+    fields = ['ticket', 'rating', 'headline', 'body']
+
+    def form_valid(self, form):
+        form.instance.user_id = self.request.user.id
+        return super().form_valid(form)
+
+    class Meta:
+        widgets = {
+            'rating': forms.RadioSelect()
+        }
+
