@@ -25,7 +25,7 @@ urlpatterns = [
                   path('', views.index, name="site-index"),
                   path('signup/', views.sign_up, name="sign-up"),
                   path('disconnect/', views.disconnect, name="disconnect"),
-                  path('flux/', views.flux, name="flux"),
+                  path('feed/', views.feed, name="feed"),
                   path('post/', views.post, name="post"),
                   path('subs/', views.subs, name="subs"),
                   path('rev/', include('bkreport.urls')),

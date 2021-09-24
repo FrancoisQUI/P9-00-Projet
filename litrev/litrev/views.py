@@ -1,14 +1,16 @@
+from itertools import chain
 from pprint import pprint
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
+from django.db.models import CharField, Value
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_list_or_404
 
 from .forms import SignUpForm
-from bkreport.models import UserFollows
+from bkreport.models import UserFollows, Review, Ticket
 
 
 def index(request):
@@ -41,7 +43,7 @@ def sign_up(request):
             login(request, user)
 
             # redirect user to flux page
-            return redirect('home')
+            return redirect('feed')
     else:
         form = SignUpForm()
     return render(request, 'litrev/signup.html', {'form': form})
@@ -52,8 +54,21 @@ def disconnect(request):
     return redirect("site-index")
 
 
-def flux(request):
-    return HttpResponse("Flux page")
+def feed(request):
+    reviews = Review.objects.all()
+    pprint(type(reviews))
+    reviews.annotate(content_type=Value('REVIEW', CharField()))
+
+    tickets = Ticket.objects.all()
+    tickets.annotate(content_type=Value('TICKET', CharField()))
+
+    posts = sorted(
+        chain(reviews, tickets),
+        key=lambda post: post.time_created,
+        reverse=True
+    )
+
+    return render(request, 'litrev/feed.html', context={'posts': posts})
 
 
 def subs(request):

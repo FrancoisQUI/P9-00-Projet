@@ -1,0 +1,20 @@
+{% extends 'litrev/base.html' %}
+
+{% block content %}
+    <div class="text-gray-300">
+        <h2>Réponse au ticket de {{ review.ticket.user.username }} intitulé : <br>
+            {{ review.ticket.title }}</h2>
+
+        <h3>Auteur :</h3>
+        <p>{{ review.user.username }}</p>
+        <h3>Note :</h3>
+        <p>{{ review.rating }}</p>
+        <h3>{{ review.headline }}</h3>
+        <p>{{ review.body }}</p>
+        <p>crée le {{ review.time_created|date:"l d F" }} à {{ review.time_created|time:"G:H" }}</p>
+
+    </div>
+
+
+
+{% endblock %}
