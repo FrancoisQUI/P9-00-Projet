@@ -1,9 +1,14 @@
 {% extends 'litrev/base.html' %}
 
 {% block content %}
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_ul }}
-        <button type="submit">Envoyer Avis</button>
-    </form>
+    <div class="css_card-container">
+        <div class="css_card-base">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_ul }}
+                {# TODO: Show Rating with stars #}
+                <button type="submit">Envoyer Avis</button>
+            </form>
+        </div>
+    </div>
 {% endblock %}

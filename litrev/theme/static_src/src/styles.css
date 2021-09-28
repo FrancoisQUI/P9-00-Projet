@@ -19,7 +19,7 @@
   }
 
   .css_card-base{
-    @apply p-6 bg-white mx-auto rounded-2xl w-full flex-grow;
+    @apply p-6 bg-white mx-auto rounded-2xl w-full flex-grow m-5;
   }
 
   .css_card-base form li {

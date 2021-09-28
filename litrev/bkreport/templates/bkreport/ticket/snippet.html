@@ -1,5 +1,10 @@
+<div class="css_card-container">
+    <div class="css_card-base bg-blue-100 text-blue-800 w-10/12">
+        <p>Ticket du {{ post.time_created }}</p>
+        <h2>{{ post.title }}</h2>
+        {# TODO: Show image #}
+        <p>Proposé par : {{ post.user.username }}</p>
+        <p>{{ post.description }}</p>
+    </div>
+</div>
 
-<h2>{{ post.title }}</h2>
-<p>by : {{ post.user.username }}</p>
-<h3>Description :</h3>
-<p>{{ post.description }}</p>

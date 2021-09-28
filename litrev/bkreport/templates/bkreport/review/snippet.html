@@ -1,1 +1,12 @@
-{{ post }}
+<div class="css_card-container">
+    <div class="css_card-base text-gray-900 w-10/12">
+        <p>Avis du : {{ post.time_created }}</p>
+        <h2>{{ post.headline }}</h2>
+
+        <p>Proposé par : {{ post.user.username }}</p>
+        <h3>Avis : {{ post.rating }} / 5</h3>
+        <p>{{ post.body }}</p>
+
+        {% include 'bkreport/ticket/snippet.html' with post=post.ticket %}</div>
+
+</div>

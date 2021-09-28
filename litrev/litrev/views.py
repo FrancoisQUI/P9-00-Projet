@@ -56,11 +56,10 @@ def disconnect(request):
 
 def feed(request):
     reviews = Review.objects.all()
-    pprint(type(reviews))
-    reviews.annotate(content_type=Value('REVIEW', CharField()))
+    reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
 
     tickets = Ticket.objects.all()
-    tickets.annotate(content_type=Value('TICKET', CharField()))
+    tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
 
     posts = sorted(
         chain(reviews, tickets),

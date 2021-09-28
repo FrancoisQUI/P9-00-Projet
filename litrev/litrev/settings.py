@@ -134,7 +134,7 @@ INTERNAL_IPS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-TOOLBAR = False
+TOOLBAR = True
 
 if DEBUG and TOOLBAR:
 

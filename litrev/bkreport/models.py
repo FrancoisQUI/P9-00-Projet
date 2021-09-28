@@ -9,7 +9,7 @@ class Ticket(models.Model):
     description = models.TextField(max_length=2038, blank=True)
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
-    image = models.ImageField(null=True, blank=True)
+    image = models.ImageField(null=True, blank=True, upload_to='books_cover')
     time_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -17,7 +17,7 @@ class Ticket(models.Model):
 
     def get_absolute_url(self):
         from django.urls import reverse
-        return reverse('ticket_view', kwargs={'pk': self.pk})
+        return reverse('ticket_details', kwargs={'pk': self.pk})
 
 
 class Review(models.Model):
@@ -37,7 +37,7 @@ class Review(models.Model):
 
     def get_absolute_url(self):
         from django.urls import reverse
-        return reverse('review_view', kwargs={'pk': self.pk})
+        return reverse('review_details', kwargs={'pk': self.pk})
 
 
 class UserFollows(models.Model):

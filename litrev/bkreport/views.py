@@ -7,7 +7,6 @@ from django.urls import reverse_lazy
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
-from bkreport.forms import TicketForm, ReviewForm
 from bkreport.models import Ticket, Review
 
 
@@ -16,7 +15,12 @@ def index(request):
 
 
 class TicketUpdateView(UpdateView):
-    pass
+    model = Ticket
+    fields = ['title', 'description', 'image']
+
+    def form_valid(self, form):
+        form.instance.user_id = self.request.user.id
+        return super().form_valid(form)
 
 
 class TicketDetailView(DetailView):
