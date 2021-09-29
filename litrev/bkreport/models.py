@@ -17,7 +17,7 @@ class Ticket(models.Model):
 
     def get_absolute_url(self):
         from django.urls import reverse
-        return reverse('ticket_details', kwargs={'pk': self.pk})
+        return reverse('ticket_detail', kwargs={'pk': self.pk})
 
 
 class Review(models.Model):
@@ -37,7 +37,7 @@ class Review(models.Model):
 
     def get_absolute_url(self):
         from django.urls import reverse
-        return reverse('review_details', kwargs={'pk': self.pk})
+        return reverse('review_detail', kwargs={'pk': self.pk})
 
 
 class UserFollows(models.Model):

@@ -1,10 +1,25 @@
-<div class="css_card-container">
-    <div class="css_card-base bg-blue-100 text-blue-800 w-10/12">
-        <p>Ticket du {{ post.time_created }}</p>
-        <h2>{{ post.title }}</h2>
-        {# TODO: Show image #}
-        <p>Proposé par : {{ post.user.username }}</p>
-        <p>{{ post.description }}</p>
-    </div>
+
+<div class="css_card-base w-10/12">
+    <p class="text-blue-600">Ticket du {{ post.time_created }}</p>
+    <h2>{{ post.title }}</h2>
+    {# TODO: Show image #}
+    <p class="text-blue-700">
+    {% if request.user == post.user %}
+        Vous Avez proposé :
+    {% else %}
+        Proposé par : {{ post.user.username }}
+    {% endif %}
+    </p>
+    <p>{{ post.description }}</p>
+
+    {% if request.user == post.user %}
+        <form action="{% url 'edit_ticket' post.id %}" class="container flex flex-row-reverse content-end">
+            <button type="submit" class="w-4/12 self-end">
+                Modifier le ticket
+            </button>
+        </form>
+    {% endif %}
+
 </div>
+
 

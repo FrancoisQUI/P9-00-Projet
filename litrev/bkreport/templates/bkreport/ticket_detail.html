@@ -1,7 +1,5 @@
 {% extends 'litrev/base.html' %}
 
 {% block content %}
-{{ ticket.title }}
-{{ ticket.user.username }}
-{{ ticket.description }}
+    {% include 'bkreport/ticket/snippet.html' with post=ticket %}
 {% endblock %}

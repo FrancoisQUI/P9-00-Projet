@@ -1,7 +1,7 @@
 {% extends 'litrev/base.html' %}
 
 {% block content %}
-    <ul class="text-gray-200">
+    <div class="css_card-container">
         {% for post in posts %}
             {% if post.content_type == 'TICKET' %}
                 {% include 'bkreport/ticket/snippet.html' with post=post %}
@@ -9,7 +9,7 @@
                 {% include 'bkreport/review/snippet.html' with post=post %}
             {%  endif %}
         {% endfor %}
-    </ul>
+    </div>
 
 
 {% endblock %}

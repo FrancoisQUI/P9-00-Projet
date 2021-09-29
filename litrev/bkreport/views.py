@@ -53,3 +53,16 @@ class ReviewCreateView(CreateView):
             'rating': forms.RadioSelect()
         }
 
+
+class ReviewUpdateView(UpdateView):
+    model = Review
+    fields = ['rating', 'headline', 'body']
+
+    def form_valid(self, form):
+        form.instance.user_id = self.request.user.id
+        return super().form_valid(form)
+
+    class Meta:
+        widgets = {
+            'rating': forms.RadioSelect()
+        }
