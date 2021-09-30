@@ -938,6 +938,10 @@ button:hover {
   margin: 0.25rem;
 }
 
+.m-auto {
+  margin: auto;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -956,6 +960,11 @@ button:hover {
 .my-2 {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+}
+
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .block {
@@ -1008,6 +1017,14 @@ button:hover {
 
 .w-4\/12 {
   width: 33.333333%;
+}
+
+.w-auto {
+  width: auto;
+}
+
+.w-8\/12 {
+  width: 66.666667%;
 }
 
 .flex-row-reverse {

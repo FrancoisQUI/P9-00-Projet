@@ -1,6 +1,14 @@
 {% extends 'litrev/base.html' %}
 
 {% block content %}
+    <div class="container flex w-8/12 m-auto">
+        <form action="{% url 'add_ticket' %}" class="w-6/12 mx-4 my-2">
+            <button>Demander une critique</button>
+        </form>
+        <form action="{% url 'add_review' %}" class="w-6/12 mx-4 my-2">
+            <button>Proposer une critique</button>
+        </form>
+    </div>
     <div class="css_card-container">
         {% for post in posts %}
             {% if post.content_type == 'TICKET' %}

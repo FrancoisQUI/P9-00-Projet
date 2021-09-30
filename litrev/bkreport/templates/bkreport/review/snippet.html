@@ -1,10 +1,10 @@
 
 <div class="css_card-base text-gray-900 w-10/12">
-    <p class="text-blue-600">Avis du : {{ post.time_created }}</p>
+    <p class="text-blue-600">Critique du : {{ post.time_created }}</p>
     <h2>{{ post.headline }}</h2>
     <p class="text-blue-900">
         {% if request.user == post.user %}
-            Vous avez proposé un avis
+            Vous avez proposé une critique
         {% else %}
             Proposé par : {{ post.user.username }}
         {% endif %}
@@ -16,7 +16,7 @@
     {% if request.user == post.user %}
         <form action="{% url 'edit_review' post.id %}" class="container flex flex-row-reverse content-end my-2">
             <button type="submit" class="w-4/12 self-end">
-                Modifier la review
+                Modifier la critique
             </button>
         </form>
     {% endif %}

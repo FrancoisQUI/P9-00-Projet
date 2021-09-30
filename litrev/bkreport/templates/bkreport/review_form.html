@@ -3,6 +3,9 @@
 {% block content %}
     <div class="css_card-container">
         <div class="css_card-base">
+            {% if ticket is not None %}
+                {% include 'bkreport/ticket/snippet.html' with post=ticket %}
+            {% endif %}
             <form method="POST">
                 {% csrf_token %}
                 {{ form.as_ul }}

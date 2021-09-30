@@ -1,23 +1,31 @@
 
 <div class="css_card-base w-10/12">
-    <p class="text-blue-600">Ticket du {{ post.time_created }}</p>
+    <p class="text-blue-600">Demande de critique du {{ post.time_created }}</p>
     <h2>{{ post.title }}</h2>
     {# TODO: Show image #}
     <p class="text-blue-700">
-    {% if request.user == post.user %}
-        Vous Avez proposé :
-    {% else %}
-        Proposé par : {{ post.user.username }}
-    {% endif %}
+        {% if request.user == post.user %}
+            Vous demandé une critique :
+        {% else %}
+            Proposé par : {{ post.user.username }}
+        {% endif %}
     </p>
     <p>{{ post.description }}</p>
 
     {% if request.user == post.user %}
         <form action="{% url 'edit_ticket' post.id %}" class="container flex flex-row-reverse content-end">
             <button type="submit" class="w-4/12 self-end">
-                Modifier le ticket
+                Modifier la demande de critique
             </button>
         </form>
+    {% else %}
+        {% if request.user.is_authenticated %}
+            <form action="{% url 'add_review_from_ticket' post.id %}" class="container flex flex-row-reverse content-end">
+                <button type="submit" class="w-4/12 self-end">
+                    Ajouter une critique
+                </button>
+            </form>
+        {% endif %}
     {% endif %}
 
 </div>
