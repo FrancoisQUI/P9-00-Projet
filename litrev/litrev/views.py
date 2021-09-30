@@ -72,8 +72,8 @@ def feed(request):
 
 def subs(request):
     user_pk = request.user.id
-    follows = get_list_or_404(UserFollows, user_id=user_pk)
-    followers = get_list_or_404(UserFollows, followed_user_id=user_pk)
+    follows = UserFollows.objects.get(user_id=user_pk)
+    followers = UserFollows.objects.get(followed_user_id=user_pk)
     context = {
         "follows": follows,
         "followers": followers,

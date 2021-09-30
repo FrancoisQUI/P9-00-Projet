@@ -20,14 +20,14 @@
         </form>
     {% else %}
         {% if request.user.is_authenticated %}
-            <form action="{% url 'add_review_from_ticket' post.id %}" class="container flex flex-row-reverse content-end">
+            {{ ticket }}
+            <form action="{% url 'add_review_from_ticket' ticket.id %}" class="container flex flex-row-reverse content-end">
                 <button type="submit" class="w-4/12 self-end">
                     Ajouter une critique
                 </button>
             </form>
         {% endif %}
     {% endif %}
-
 </div>
 
 
