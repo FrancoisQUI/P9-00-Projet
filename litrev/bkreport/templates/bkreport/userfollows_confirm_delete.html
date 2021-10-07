@@ -1,0 +1,13 @@
+{% extends 'litrev/base.html' %}
+
+{% block content %}
+    <div class="css_card-container">
+        <div class="css_card-base">
+            <form method="post">
+                {% csrf_token %}
+                <p>voulez vous arrêter de suivre {{ user.name }} ?</p>
+                <button class="bg-red-500 hover:bg-red-900" type="submit">Oui je suis sûr !</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

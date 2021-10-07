@@ -28,10 +28,12 @@ urlpatterns = [
                   path('feed/', views.feed, name="feed"),
                   path('post/', views.post, name="post"),
                   path('subs/', views.subs, name="subs"),
+                  path('subs/<int:pk>/delete', views.UserFollowsDeleteView.as_view(), name="subs-delete"),
                   path('rev/', include('bkreport.urls')),
                   path('admin/', admin.site.urls),
               ] \
-              + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+              + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)\
+              + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     import debug_toolbar

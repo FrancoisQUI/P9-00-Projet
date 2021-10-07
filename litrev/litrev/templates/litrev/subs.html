@@ -6,9 +6,8 @@
             <div class="container css_card-base w-full">
                 <h2>Suivre d'autres utilisateurs</h2>
                 <form method="POST">
-                    <label for="username"> Nom d'utilisateur </label>
-                    <input type="text" name="username">
-                    <button type="submit"> Suivre </button>
+                    {% csrf_token %}
+                    {{ form.as_ul }}
                 </form>
             </div>
         </div>

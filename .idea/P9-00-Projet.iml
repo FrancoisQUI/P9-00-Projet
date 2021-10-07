@@ -31,6 +31,8 @@
         <option value="$MODULE_DIR$" />
         <option value="$MODULE_DIR$/litrev/litrev/templates" />
         <option value="$MODULE_DIR$/litrev/bkreport/templates" />
+        <option value="$MODULE_DIR$/litrev/bkreport/templates/bkreport/ticket" />
+        <option value="$MODULE_DIR$/litrev/bkreport/templates/bkreport/review" />
       </list>
     </option>
   </component>

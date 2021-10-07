@@ -1,13 +1,13 @@
 from itertools import chain
 from pprint import pprint
 
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.models import User
 from django.db.models import CharField, Value
 from django.http import HttpResponse
-from django.shortcuts import render, redirect, get_list_or_404
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views.generic import DeleteView
 
 from .forms import SignUpForm
 from bkreport.models import UserFollows, Review, Ticket
@@ -72,8 +72,8 @@ def feed(request):
 
 def subs(request):
     user_pk = request.user.id
-    follows = UserFollows.objects.get(user_id=user_pk)
-    followers = UserFollows.objects.get(followed_user_id=user_pk)
+    follows = UserFollows.objects.filter(user_id=user_pk)
+    followers = UserFollows.objects.filter(followed_user_id=user_pk)
     context = {
         "follows": follows,
         "followers": followers,
@@ -83,3 +83,8 @@ def subs(request):
 
 def post(request):
     return HttpResponse("Post page")
+
+
+class UserFollowsDeleteView(DeleteView):
+    model = UserFollows
+    success_url = reverse_lazy('subs')

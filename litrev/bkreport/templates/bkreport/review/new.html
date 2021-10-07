@@ -2,8 +2,18 @@
 
 {% block content %}
 
+
+
+
     <div class="container css_card-container">
         <div class="container css_card-base">
+
+            {% if ticket is not None %}
+                <p> Vous proposez un avis pour le Ticket :</p>
+                {% include "bkreport/ticket/snippet.html"%}
+                <hr>
+            {% endif %}
+
             <p class="text-red-600">{{ message|default_if_none:" "}}</p>
             <form method="POST">
                 {% csrf_token %}
