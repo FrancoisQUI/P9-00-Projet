@@ -12,14 +12,23 @@
 
     <h3>Avis : {{ review.rating }} / 5</h3>
     <p>{{ review.body }}</p>
-
-    {% if request.user == review.user %}
-        <form action="{% url 'edit_review' review.id %}" class="container flex flex-row-reverse content-end my-2">
-            <button type="submit" class="w-4/12 self-end">
-                Modifier la critique
-            </button>
-        </form>
-    {% endif %}
+    <div class="container flex">
+        {% if request.user == review.user %}
+            <form action="{% url 'edit_review' review.id %}" class="container flex flex-row-reverse content-end p-5">
+                <button type="submit" class="">
+                    Modifier la critique
+                </button>
+            </form>
+            {% if delete_button is True %}
+                <form action="{% url 'remove_review' review.id %}" class="container flex flex-row-reverse content-end p-5">
+                    <button type="submit" class="bg-red-500">
+                        Supprimer cette critique
+                    </button>
+                </form>
+            {% endif %}
+        {% endif %}
+    </div>
     <hr>
+
     {% include 'bkreport/ticket/snippet.html' with ticket=review.ticket %}
 </div>

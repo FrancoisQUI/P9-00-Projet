@@ -3,6 +3,8 @@ from pprint import pprint
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User
+from django.db import IntegrityError
 from django.db.models import CharField, Value
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -10,6 +12,7 @@ from django.urls import reverse_lazy
 from django.views.generic import DeleteView
 
 from .forms import SignUpForm
+from bkreport.forms import UserFollowsForm
 from bkreport.models import UserFollows, Review, Ticket
 
 
@@ -70,19 +73,49 @@ def feed(request):
     return render(request, 'litrev/feed.html', context={'posts': posts})
 
 
+def post(request):
+    user = request.user
+
+    reviews = Review.objects.filter(user=user)
+    reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
+
+    tickets = Ticket.objects.filter(user=user)
+    tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
+
+    posts = sorted(
+        chain(reviews, tickets),
+        key=lambda post: post.time_created,
+        reverse=True
+    )
+
+    return render(request, 'litrev/feed.html', context={'posts': posts, 'delete_button': True})
+
+
 def subs(request):
+    context = {}
+    if request.method == 'POST':
+        followed_user_pk = request.POST.get('followed_user')
+        followed_user = User.objects.get(pk=followed_user_pk)
+        user = request.user
+        form = UserFollowsForm(request.POST)
+        if form.is_valid():
+            try:
+                follow = UserFollows.objects.create(user=user, followed_user=followed_user)
+                follow.save()
+                return redirect('subs')
+            except IntegrityError:
+                context['error_message'] = f'Vous suivez déjà cette personne : {followed_user}'
+
     user_pk = request.user.id
     follows = UserFollows.objects.filter(user_id=user_pk)
     followers = UserFollows.objects.filter(followed_user_id=user_pk)
-    context = {
-        "follows": follows,
-        "followers": followers,
-    }
+    form = UserFollowsForm()
+    context["follows"] = follows
+    context["followers"] = followers
+    context["form"] = form
+
+    pprint(context)
     return render(request, 'litrev/subs.html', context)
-
-
-def post(request):
-    return HttpResponse("Post page")
 
 
 class UserFollowsDeleteView(DeleteView):

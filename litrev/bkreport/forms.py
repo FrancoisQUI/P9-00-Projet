@@ -1,6 +1,6 @@
 from django.forms import ModelForm, RadioSelect
 
-from bkreport.models import Review
+from bkreport.models import Review, UserFollows
 
 
 class ReviewForm(ModelForm):
@@ -15,3 +15,9 @@ class ReviewFormFromTicket(ModelForm):
         model = Review
         fields = ["rating", "headline", "body"]
         widgets = {"rating": RadioSelect()}
+
+
+class UserFollowsForm(ModelForm):
+    class Meta:
+        model = UserFollows
+        fields = ["followed_user"]

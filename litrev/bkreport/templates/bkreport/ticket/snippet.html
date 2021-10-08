@@ -11,22 +11,30 @@
         {% endif %}
     </p>
     {% if ticket.image.url is not None %}
+        {{ ticket.image  }}
         <img src="{{ ticket.image.url }}" alt="">
     {% else %}
         <p>Le ticket ne comporte pas d'image</p>
     {% endif %}
     <p>{{ ticket.description }}</p>
-    <div class="container">
+    <div class="container flex w-10/12 justify-items-end">
         {% if request.user == ticket.user %}
-            <form action="{% url 'edit_ticket' ticket.id %}" class="container flex flex-row-reverse content-end">
-                <button type="submit" class="w-4/12 self-end">
+            <form action="{% url 'edit_ticket' ticket.id %}" class="p-2 w-4/12">
+                <button type="submit" class="">
                     Modifier la demande de critique
                 </button>
             </form>
+            {% if delete_button is True %}
+                <form action="{% url 'remove_ticket' ticket.id %}" class="p-2 w-4/12">
+                    <button type="submit" class="bg-red-500">
+                        Supprimer cette demande de critique
+                    </button>
+                </form>
+            {% endif %}
         {% else %}
             {% if request.user.is_authenticated and show_ticket_only is not True %}
-                <form action="{% url 'add_review_from_ticket' ticket.id %}" class="container flex flex-row-reverse content-end">
-                    <button type="submit" class="w-4/12 self-end">
+                <form action="{% url 'add_review_from_ticket' ticket.id %}" class="p-2 w-4/12">
+                    <button type="submit" class="">
                         Ajouter une critique
                     </button>
                 </form>

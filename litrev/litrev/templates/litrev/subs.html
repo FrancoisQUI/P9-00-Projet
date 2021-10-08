@@ -8,16 +8,24 @@
                 <form method="POST">
                     {% csrf_token %}
                     {{ form.as_ul }}
+                    {% if error_message is not None %}
+                        <p class="text-red-500"> {{ error_message }} </p>
+                    {% endif %}
+                    <button type="submit">Suivre</button>
                 </form>
             </div>
         </div>
         <div class="ccs_card-container">
             <div class="container css_card-base w-full">
                 <h2>Vos abonnements</h2>
-                <ul>
+                <ul class="container flex flex-wrap">
                     {% for follow in follows %}
-                        <li>
-                            {{ follow.followed_user }}
+                        <li class="md:w-6/12 flex items-center justify-center bg-blue-200 h-20 flex-shrink-0">
+                            <p class="w-6/12 flex items-center justify-center">{{ follow.followed_user }}</p>
+                            <form action="{% url 'subs-delete' follow.id%}"
+                                  class="w-6/12 flex items-center justify-center">
+                                <button type="submit" class="w-6/12 bg-red-500">Remove</button>
+                            </form>
                         </li>
                     {% endfor %}
                 </ul>

@@ -2,6 +2,7 @@ from pprint import pprint
 
 from django import forms
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
@@ -139,3 +140,13 @@ class ReviewUpdateView(UpdateView):
         widgets = {
             'rating': forms.RadioSelect()
         }
+
+
+class TicketDeleteView(DeleteView):
+    model = Ticket
+    success_url = reverse_lazy('post')
+
+
+class ReviewDeleteView(DeleteView):
+    model = Review
+    success_url = reverse_lazy('post')
