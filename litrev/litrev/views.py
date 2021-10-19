@@ -58,10 +58,14 @@ def disconnect(request):
 
 
 def feed(request):
-    reviews = Review.objects.all()
+    user = request.user
+    followed_user = UserFollows.objects.filter(user=user)
+    followed_by = UserFollows.objects.filter(followed_user=user)
+
+    reviews = Review.objects.filter(user__id__in=followed_user)
     reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
 
-    tickets = Ticket.objects.all()
+    tickets = Ticket.objects.filter(user__id__in=followed_by)
     tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
 
     posts = sorted(

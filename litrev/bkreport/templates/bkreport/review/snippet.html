@@ -9,7 +9,19 @@
             Proposé par : {{ review.user.username }}
         {% endif %}
     </p>
-
+    {% if review.rating == 0 %}
+        &#9734; &#9734; &#9734; &#9734; &#9734;
+    {% elif review.rating == 1 %}
+        &#9733; &#9734; &#9734; &#9734; &#9734;
+    {% elif review.rating == 2 %}
+        &#9733; &#9733; &#9734; &#9734; &#9734;
+    {% elif review.rating == 3 %}
+        &#9733; &#9733; &#9733; &#9734; &#9734;
+    {% elif review.rating == 4 %}
+        &#9733; &#9733; &#9733; &#9733; &#9734;
+    {% elif review.rating == 5 %}
+        &#9733; &#9733; &#9733; &#9733; &#9733;
+    {% endif %}
     <h3>Avis : {{ review.rating }} / 5</h3>
     <p>{{ review.body }}</p>
     <div class="container flex">
